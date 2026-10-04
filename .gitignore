@@ -7,3 +7,5 @@
 # VScode environment
 .vscode
 .clangd
+
+build
