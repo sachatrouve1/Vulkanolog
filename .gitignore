@@ -1,0 +1,9 @@
+# Nix devhShell
+.direnv
+
+# C++ compilation files
+*.o
+
+# VScode environment
+.vscode
+.clangd
