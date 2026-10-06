@@ -3,11 +3,12 @@ project(Vulkanolog VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(Vulkan_INCLUDE_DIR "$ENV{VULKAN_HEADERS_PATH}/include")
 set(Vulkan_LIBRARY "$ENV{VULKAN_LOADER_PATH}/lib/libvulkan.so")
 set(GLM_INCLUDE_DIR "$ENV{GLM_PATH}/include")
 set(VMA_INCLUDE_DIR "$ENV{VULKAN_MEMORY_ALLOCATOR_PATH}/include")
-set(GLM_INCLUDE_DIR "$ENV{KTX_PATH}/include")
+set(KTX_INCLUDE_DIR "$ENV{KTX_PATH}/include")
 
 # Pkgconfig
 find_package(PkgConfig REQUIRED)
@@ -29,13 +30,18 @@ add_library(imgui STATIC
     libs/imgui/backends/imgui_impl_vulkan.cpp
 )
 
+target_include_directories(imgui PUBLIC
+  libs/imgui
+  libs/imgui/backends
+)
+
 target_include_directories(Vulkanolog PRIVATE
   libs/imgui
   libs/imgui/backends
   ${GLFW3_INCLUDE_DIRS} 
   ${Vulkan_INCLUDE_DIR}
-  ${VMA_INCLUDE_DIRS}
-  ${GLM_INCLUDE_DIRS}
+  ${VMA_INCLUDE_DIR}
+  ${GLM_INCLUDE_DIR}
   ${TinyObj_INCLUDE_DIRS}
   ${KTX_INCLUDE_DIRS}
   ${Slang_INCLUDE_DIRS}
